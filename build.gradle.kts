@@ -1,6 +1,7 @@
 plugins {
     `java-library`
     jacoco
+    id("com.github.kt3k.coveralls") version "2.8.2"
 }
 
 repositories {
