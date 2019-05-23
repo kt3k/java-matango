@@ -16,5 +16,5 @@ jobs:
             - ~/.gradle
           key: cache-{{ checksum "build.gradle.kts" }}
       - store_test_results:
-          path: target/surefire-reports
+          path: build/test-results/test/
       - run: bash <(curl -s https://codecov.io/bash)
