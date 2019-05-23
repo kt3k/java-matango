@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/w
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: cache-{{ checksum "build.gradle.kts" }}
+      - run: ./gradlew jacocoTestReport
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: cache-{{ checksum "build.gradle.kts" }}
+      - store_test_results:
+          path: target/surefire-reports
+      - run: bash <(curl -s https://codecov.io/bash)
