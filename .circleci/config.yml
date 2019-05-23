@@ -8,6 +8,8 @@ jobs:
       - checkout
       - restore_cache:
           key: cache-{{ checksum "build.gradle.kts" }}
+      - run: ./gradlew build
+      - run: ./gradlew test
       - run: ./gradlew jacocoTestReport
       - save_cache:
           paths:
