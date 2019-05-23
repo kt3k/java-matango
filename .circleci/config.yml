@@ -8,11 +8,11 @@ jobs:
       - checkout
       - restore_cache:
           key: cache-{{ checksum "build.gradle.kts" }}
-      - run: ./gradlew jacocoTestReport
+      - run: ./gradlew build test jacocoTestReport
       - save_cache:
           paths:
             - ~/.gradle
           key: cache-{{ checksum "build.gradle.kts" }}
       - store_test_results:
-          path: build/test-results/test/
+          path: build/test-results/test/TEST-org.kt3k.matango.MatangoTest.xml
       - run: ./gradlew coveralls
